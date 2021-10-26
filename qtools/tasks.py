@@ -9,13 +9,13 @@ import time
 import traceback
 import inspect
 import logging
-from Queue import Queue as tQueue
-from Queue import Empty
+from queue import Queue as tQueue
+from queue import Empty
 from threading import Thread
 from multiprocessing import Process, Queue as pQueue
 # Need to handle threads in a particular way with Qt.
 try:
-    from qtpy.QtCore import QThread, QTimer, QObject
+    from .qtpy.QtCore import QThread, QTimer, QObject
     def _start_thread(fun, *args, **kwargs):
         """Start a QThread."""
         class MyQThread(QThread):
@@ -86,7 +86,7 @@ def worker_loop(task_obj, qin, qout, qout_sync, impatient=False):
                 result = getattr(task_obj, method)(*args, **kwargs)
             except Exception as e:
                 msg = traceback.format_exc()
-                print("An exception occurred: {0:s}.".format(msg))
+                print(("An exception occurred: {0:s}.".format(msg)))
                 result = e
             # send back the task arguments, and the result
             kwargs_back = kwargs.copy()

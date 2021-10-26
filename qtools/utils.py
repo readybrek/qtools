@@ -1,12 +1,12 @@
 import sys
-from qtools.qtpy import QtCore, QtGui
+from qtools.qtpy import QtCore, QtGui, QtWidgets # EJ20211025 - Added QtWidgets for PyQt5
 
 def get_application():
     """Get the current QApplication, or create a new one."""
     app_created = False
     app = QtCore.QCoreApplication.instance()
     if app is None:
-        app = QtGui.QApplication(sys.argv)
+        app = QtWidgets.QApplication(sys.argv)
         app_created = True
     return app, app_created
     
@@ -24,7 +24,7 @@ def show_window(window, **kwargs):
     """
     app, app_created = get_application()
     app.references = set()
-    if not isinstance(window, QtGui.QWidget):
+    if not isinstance(window, QtWidgets.QWidget):
         window = window(**kwargs)
     app.references.add(window)
     window.show()

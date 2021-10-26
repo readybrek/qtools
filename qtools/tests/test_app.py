@@ -100,7 +100,7 @@ def wrap(fun):
         try:
             fun()
         except Exception as e:
-            print(traceback.format_exc())
+            print((traceback.format_exc()))
     return wrapped
     
 def start_delayed(fun, delay):
